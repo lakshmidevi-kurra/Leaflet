@@ -6,51 +6,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebMap</title>
 
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
         integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- jQuery UI CSS -->
     <link rel="stylesheet" href="Source/jquery-ui.min.css">
 
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Leaflet JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
         integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- Leaflet Source Debugging Version (Optional) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet-src.js"
         integrity="sha512-x4B5AXtD8SqDqEpzOFXxCE0OOUhQ0Fep3Qka6WtUa3tw7z4fC7eOI4Vjm191HB63//4Y554Zxydbt2Hi8b+bVQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
+    <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
         integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
         integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
         crossorigin="anonymous"></script>
 
+    <!-- jQuery UI -->
     <script src="Source/jquery-ui.min.js"></script>
 </head>
 
 <body>
+
+    <!-- Sidebar Container -->
     <div id="sidediv" class="col md-3"></div>
+
+    <!-- Map Container -->
     <div id="mymapdiv" class="col md-12"></div>
+
     <script>
-        // initialize the map on the "map" div with a given center and zoom
+        /** 
+         * Initialize the Leaflet Map
+         * - Target Div: "mymapdiv"
+         * - Center: Dhaka, Bangladesh
+         * - Zoom Level: 12
+         * - Disabled default controls (attribution & zoom)
+         */
         var mymapdiv = L.map('mymapdiv', {
-            center: [23.755,90.4358],
-            zoom: 12
+            center: [23.755, 90.4358],
+            zoom: 12,
+            attributtionControl: false,
+            zoomControl: false
         });
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymapdiv);
+        /* 
+         * Base Map Layers 
+         * These are different tile sources that users can switch between
+         */
+
+        // Default OpenStreetMap Base Layer
+        var openstreetmap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png?', {
+            maxZoom: 23
+        });
+
+        // CartoDB Light Theme Map
+        var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 23
+        });
+
+        // Satellite View from Stadia Maps
+        var Stadia_AlidadeSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}', {
+            minZoom: 0,
+            maxZoom: 20,
+            ext: 'jpg'
+        });
+
+        // Google Streets Layer
+        var GoogleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 23,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+        // Add default base map to the map
+        GoogleStreets.addTo(mymapdiv);
 
     </script>
-</body>
 
+</body>
 </html>
