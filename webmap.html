@@ -23,8 +23,7 @@
     <!-- Easy Button CSS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
 
-    <!--Mouse Position CSS-->
-    <link rel="stylesheet" href="plugins/mousepositions/L.Control.MousePosition.css">
+
 
     <!--Fontawesome Link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -33,6 +32,14 @@
 
     <!--Measuments Links-->
     <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
+
+    <!--Mouse Position CSS-->
+    <link rel="stylesheet" href="plugins/mousepositions/L.Control.MousePosition.css">
+
+    <!-- Draw Tools -->
+    <!--Geoman -->
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />
+
 
     <!-- Leaflet JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
@@ -73,6 +80,10 @@
 
     <!--Mouse Position JS -->
     <script src="plugins/mousepositions/L.Control.MousePosition.js"></script>
+
+    <!--Geoman JS-->
+
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.js"></script>
 
 </head>
 
@@ -166,7 +177,26 @@
 
         //Mouse Position
 
-        L.control.mousePosition({position:'bottomright'}).addTo(mymap);
+        L.control.mousePosition({ position: 'bottomright' }).addTo(mymap);
+
+        /*
+        Geometry Management for Leaflet 1.0 and higher. Draw, Edit, Drag, Cut, Rotate, Split, Scale, Measure, Snap 
+        and Pin Layers like Markers, CircleMarkers, Polylines, Polygons, Circles, Rectangles, ImageOverlays, Text,
+         LayerGroups, GeoJSON, MultiLineStrings and MultiPolygons. Supports holes in polygons, canvas mode and more.
+        */
+
+        // add Leaflet-Geoman controls with some options to the map  
+        mymap.pm.addControls({
+            position: 'topleft',
+            drawCircleMarker: false,
+            rotateMode: false,
+        });
+
+
+        mymap.on("pm:create",function(e){
+            console.log(e);
+            
+        });
 
     </script>
 
