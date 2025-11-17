@@ -18,16 +18,21 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- Sidebar CSS -->
-    <link rel="stylesheet" href="plugins/L.Control.Sidebar.css">
+    <link rel="stylesheet" href="plugins/sidebar/L.Control.Sidebar.css">
 
     <!-- Easy Button CSS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+
+    <!--Mouse Position CSS-->
+    <link rel="stylesheet" href="plugins/mousepositions/L.Control.MousePosition.css">
 
     <!--Fontawesome Link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!--Measuments Links-->
+    <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
 
     <!-- Leaflet JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
@@ -58,11 +63,16 @@
 
     <!-- Sidebar js -->
 
-    <script src="plugins/L.Control.Sidebar.js"></script>
+    <script src="plugins/sidebar/L.Control.Sidebar.js"></script>
 
     <!--Easy Button JS-->
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 
+    <!--Measuments JS-->
+    <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
+
+    <!--Mouse Position JS -->
+    <script src="plugins/mousepositions/L.Control.MousePosition.js"></script>
 
 </head>
 
@@ -147,6 +157,16 @@
         ).addTo(mymap);
 
 
+
+        //Measurements
+        L.control.polylineMeasure({
+            position: 'topright'
+        }).addTo(mymap);
+
+
+        //Mouse Position
+
+        L.control.mousePosition({position:'bottomright'}).addTo(mymap);
 
     </script>
 
