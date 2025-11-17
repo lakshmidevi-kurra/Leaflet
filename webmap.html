@@ -17,6 +17,18 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Sidebar CSS -->
+    <link rel="stylesheet" href="plugins/L.Control.Sidebar.css">
+
+    <!-- Easy Button CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+
+    <!--Fontawesome Link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <!-- Leaflet JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
         integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg=="
@@ -43,12 +55,21 @@
 
     <!-- jQuery UI -->
     <script src="Source/jquery-ui.min.js"></script>
+
+    <!-- Sidebar js -->
+
+    <script src="plugins/L.Control.Sidebar.js"></script>
+
+    <!--Easy Button JS-->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
+
 </head>
 
 <body>
 
     <!-- Sidebar Container -->
-    <div id="sidediv" class="col md-3"></div>
+    <div id="sidebar" class="col md-3"></div>
 
     <!-- Map Container -->
     <div id="mymapdiv" class="col md-12"></div>
@@ -61,7 +82,7 @@
          * - Zoom Level: 12
          * - Disabled default controls (attribution & zoom)
          */
-        var mymapdiv = L.map('mymapdiv', {
+        var mymap = L.map('mymapdiv', {
             center: [23.755, 90.4358],
             zoom: 12,
             attributtionControl: false,
@@ -97,9 +118,38 @@
         });
 
         // Add default base map to the map
-        GoogleStreets.addTo(mymapdiv);
+        GoogleStreets.addTo(mymap);
+
+
+
+        // Sidebar
+        var sidebar = L.control.sidebar('sidebar', {
+            position: 'left'
+        });
+
+        mymap.addControl(sidebar);
+
+        // Show Sidebar
+        // sidebar.show();
+
+        //Easy Button 
+
+        L.easyButton('fa-globe', function () {
+            sidebar.toggle();
+        }).addTo(mymap);
+
+
+        //Scale
+        L.control.scale(
+            {
+                position: 'bottomleft', maxWidth: 100, imperial: false
+            }
+        ).addTo(mymap);
+
+
 
     </script>
 
 </body>
+
 </html>
