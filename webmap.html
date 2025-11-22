@@ -210,7 +210,11 @@
         });
 
 
-        var miniMap = new L.Control.MiniMap(CartoDB_Positron).addTo(mymap);
+        var miniMap = new L.Control.MiniMap(CartoDB_Positron, {
+            position:'bottomleft',
+            height: 200,
+            width: 200
+        }).addTo(mymap);
 
 
     </script>
