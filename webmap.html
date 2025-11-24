@@ -102,6 +102,11 @@
     <div id="mymapdiv" class="col md-12"></div>
 
     <script>
+        var mymap;
+        var baseLayers;
+        var overlays;
+
+
         /** 
          * Initialize the Leaflet Map
          * - Target Div: "mymapdiv"
@@ -109,7 +114,7 @@
          * - Zoom Level: 12
          * - Disabled default controls (attribution & zoom)
          */
-        var mymap = L.map('mymapdiv', {
+        mymap = L.map('mymapdiv', {
             center: [23.755, 90.4358],
             zoom: 12,
             attributtionControl: false,
@@ -174,6 +179,9 @@
         ).addTo(mymap);
 
 
+        // Zoom Control 
+        L.control.zoom({ position: 'topright' }).addTo(mymap);
+
 
         //Measurements
         L.control.polylineMeasure({
@@ -211,12 +219,24 @@
 
 
         var miniMap = new L.Control.MiniMap(CartoDB_Positron, {
-            position:'bottomleft',
+            position: 'bottomleft',
             height: 200,
             width: 200
         }).addTo(mymap);
 
 
+        // Layer Controls 
+
+        baseLayers = {
+            "Google Streets": GoogleStreets,
+            "OSM": openstreetmap,
+            "CartoDBPositron": CartoDB_Positron,
+            "Stadia AlidadeSatellite": Stadia_AlidadeSatellite
+
+        };
+        var control_layers = L.control.layers(baseLayers, overlays).addTo(mymap)
+
+        // 
     </script>
 
 </body>
